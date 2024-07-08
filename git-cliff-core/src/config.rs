@@ -115,6 +115,8 @@ pub struct GitConfig {
 	pub sort_commits:             Option<String>,
 	/// Limit the number of commits included in the changelog.
 	pub limit_commits:            Option<usize>,
+	/// Limit commits to include scopes.
+	pub scopes: Option<Vec<String>>
 }
 
 /// Remote configuration.

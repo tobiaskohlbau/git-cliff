@@ -226,6 +226,14 @@ pub struct Opt {
 	/// Strips the given parts from the changelog.
 	#[arg(short, long, value_name = "PART", value_enum)]
 	pub strip:            Option<Strip>,
+	/// Sets scopes to filter on.
+	#[arg(
+		long,
+		env = "GIT_CLIFF_SCOPE",
+		value_name="SCOPE",
+		num_args(1..)
+	)]
+	pub scope:      Option<Vec<String>>,
 	/// Sets sorting of the commits inside sections.
 	#[arg(
 		long,

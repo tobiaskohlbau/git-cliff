@@ -114,6 +114,14 @@ impl<'a> Changelog<'a> {
 				.iter()
 				.cloned()
 				.filter_map(|commit| Self::process_commit(commit, &self.config.git))
+				.filter_map(|commit| {
+					if let (Some(scopes), Some(scope)) = (&self.config.git.scopes, commit.scope.as_ref().or(commit.default_scope.as_ref())) {
+						if !scopes.contains(&scope) {
+							return None
+						}
+					}
+					Some(commit)
+				})
 				.flat_map(|commit| {
 					if self.config.git.split_commits.unwrap_or(false) {
 						commit
